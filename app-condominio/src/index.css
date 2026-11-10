@@ -1,111 +1,130 @@
+/* Estilos globais da app React (CSS próprio, mobile-first) */
 :root {
-  --text: #6b6375;
-  --text-h: #08060d;
-  --bg: #fff;
-  --border: #e5e4e7;
-  --code-bg: #f4f3ec;
-  --accent: #aa3bff;
-  --accent-bg: rgba(170, 59, 255, 0.1);
-  --accent-border: rgba(170, 59, 255, 0.5);
-  --social-bg: rgba(244, 243, 236, 0.5);
-  --shadow:
-    rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
-
-  --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --heading: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --mono: ui-monospace, Consolas, monospace;
-
-  font: 18px/145% var(--sans);
-  letter-spacing: 0.18px;
-  color-scheme: light dark;
-  color: var(--text);
-  background: var(--bg);
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-
-  @media (max-width: 1024px) {
-    font-size: 16px;
-  }
+  --cor-primaria: #1d4ed8;
+  --cor-primaria-escura: #1e3a8a;
+  --cor-texto: #1f2937;
+  --cor-texto-suave: #4b5563;
+  --cor-fundo: #f9fafb;
+  --cor-cartao: #ffffff;
+  --cor-borda: #e5e7eb;
+  --cor-erro: #b91c1c;
+  --cor-sucesso: #15803d;
+  --raio: 0.5rem;
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  line-height: 1.6;
+  color: var(--cor-texto);
+  background: var(--cor-fundo);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --text: #9ca3af;
-    --text-h: #f3f4f6;
-    --bg: #16171d;
-    --border: #2e303a;
-    --code-bg: #1f2028;
-    --accent: #c084fc;
-    --accent-bg: rgba(192, 132, 252, 0.15);
-    --accent-border: rgba(192, 132, 252, 0.5);
-    --social-bg: rgba(47, 48, 58, 0.5);
-    --shadow:
-      rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
-  }
+*, *::before, *::after { box-sizing: border-box; }
+body { margin: 0; }
 
-  #social .button-icon {
-    filter: invert(1) brightness(2);
-  }
+.container {
+  width: 100%;
+  max-width: 60rem;
+  margin-inline: auto;
+  padding-inline: 1rem;
 }
 
-body {
-  margin: 0;
+main.container { padding-block: 1.5rem; }
+
+a { color: var(--cor-primaria); }
+
+/* Foco bem visível para navegação por teclado (R6) */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible {
+  outline: 3px solid var(--cor-primaria);
+  outline-offset: 2px;
 }
 
-#root {
-  width: 1126px;
-  max-width: 100%;
-  margin: 0 auto;
-  text-align: center;
-  border-inline: 1px solid var(--border);
-  min-height: 100svh;
+.skip-link { position: absolute; left: 1rem; top: -3rem; background: #fff; padding: 0.5rem; }
+.skip-link:focus { top: 0.5rem; }
+
+/* ---------- Navbar ---------- */
+.navbar { background: var(--cor-primaria-escura); }
+.navbar a, .navbar .btn-link { color: #fff; }
+
+.navbar-inner {
   display: flex;
-  flex-direction: column;
-  box-sizing: border-box;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding-block: 0.75rem;
 }
 
-h1,
-h2 {
-  font-family: var(--heading);
-  font-weight: 500;
-  color: var(--text-h);
+.logo { font-weight: 700; font-size: 1.25rem; text-decoration: none; }
+
+.nav-list {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
-h1 {
-  font-size: 56px;
-  letter-spacing: -1.68px;
-  margin: 32px 0;
-  @media (max-width: 1024px) {
-    font-size: 36px;
-    margin: 20px 0;
-  }
+.nav-list a[aria-current='page'] { font-weight: 700; }
+
+/* ---------- Botões ---------- */
+.btn {
+  font: inherit;
+  cursor: pointer;
+  border: 0;
+  border-radius: var(--raio);
+  padding: 0.6rem 1.2rem;
 }
-h2 {
-  font-size: 24px;
-  line-height: 118%;
-  letter-spacing: -0.24px;
-  margin: 0 0 8px;
-  @media (max-width: 1024px) {
-    font-size: 20px;
-  }
+.btn-primary { background: var(--cor-primaria); color: #fff; font-weight: 600; }
+.btn-primary:hover { background: var(--cor-primaria-escura); }
+.btn-primary:disabled { opacity: 0.7; cursor: wait; }
+.btn-link { background: none; padding: 0; text-decoration: underline; }
+
+/* ---------- Formulários ---------- */
+.form { display: grid; gap: 1rem; max-width: 24rem; }
+.campo { display: grid; gap: 0.25rem; }
+.campo label { font-weight: 600; }
+.campo input {
+  font: inherit;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--cor-texto-suave);
+  border-radius: var(--raio);
 }
-p {
+
+/* ---------- Estados (loading / empty / error) ---------- */
+.status { padding: 0.75rem 1rem; border-radius: var(--raio); background: var(--cor-cartao); border: 1px solid var(--cor-borda); }
+.status-error { color: var(--cor-erro); border-color: var(--cor-erro); }
+
+/* ---------- Cartões ---------- */
+.card-list {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;   /* mobile: 1 coluna */
+  gap: 1rem;
+}
+
+.card {
+  background: var(--cor-cartao);
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio);
+  padding: 1rem;
+}
+.card-title { margin: 0 0 0.5rem; font-size: 1.15rem; }
+
+.card-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+  color: var(--cor-texto-suave);
   margin: 0;
 }
 
-code,
-.counter {
-  font-family: var(--mono);
-  display: inline-flex;
-  border-radius: 4px;
-  color: var(--text-h);
-}
+.badge { font-size: 0.85rem; font-weight: 600; padding: 0.1rem 0.6rem; border-radius: 999px; }
+.badge-open { background: #dcfce7; color: #14532d; }
+.badge-closed { background: #e5e7eb; color: #374151; }
 
-code {
-  font-size: 15px;
-  line-height: 135%;
-  padding: 4px 8px;
-  background: var(--code-bg);
+@media (min-width: 48em) {
+  .card-list { grid-template-columns: repeat(2, 1fr); }
 }
