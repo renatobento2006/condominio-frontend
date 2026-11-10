@@ -1,0 +1,138 @@
+/* =========================================================
+   CondoGest · Landing page
+   Abordagem MOBILE-FIRST: os estilos "normais" são para o
+   telemóvel; os @media (min-width) acrescentam regras para
+   ecrãs maiores. Sem frameworks: só CSS próprio.
+   ========================================================= */
+
+/* ---------- 1. Variáveis (custom properties) ---------- */
+:root {
+  --cor-primaria: #1d4ed8;
+  --cor-primaria-escura: #1e3a8a;
+  --cor-texto: #1f2937;
+  --cor-texto-suave: #4b5563;   /* contraste >= 4.5:1 sobre branco (Lighthouse) */
+  --cor-fundo: #ffffff;
+  --cor-fundo-alt: #f3f4f6;
+  --cor-erro: #b91c1c;
+  --cor-sucesso: #15803d;
+
+  --fonte-base: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+
+  --espaco-1: 0.5rem;
+  --espaco-2: 1rem;
+  --espaco-3: 1.5rem;
+  --espaco-4: 2.5rem;
+
+  --raio: 0.5rem;
+  --largura-max: 72rem;
+}
+
+/* ---------- 2. Reset mínimo ---------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;   /* padding e border contam dentro da largura */
+}
+
+body {
+  margin: 0;
+  font-family: var(--fonte-base);
+  line-height: 1.6;
+  color: var(--cor-texto);
+  background: var(--cor-fundo);
+}
+
+img,
+video {
+  max-width: 100%;          /* media nunca rebenta o layout no telemóvel */
+  height: auto;
+  display: block;
+}
+
+/* ---------- 3. Utilitários ---------- */
+.container {
+  width: 100%;
+  max-width: var(--largura-max);
+  margin-inline: auto;
+  padding-inline: var(--espaco-2);
+}
+
+.skip-link {
+  position: absolute;
+  left: var(--espaco-2);
+  top: -3rem;               /* escondido fora do ecrã... */
+}
+.skip-link:focus {
+  top: var(--espaco-2);     /* ...e aparece quando recebe foco pelo teclado */
+}
+
+/* Foco bem visível em tudo o que é interativo (R6) */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+  outline: 3px solid var(--cor-primaria);
+  outline-offset: 2px;
+}
+
+/* ---------- 4. Cabeçalho (Flexbox) ---------- */
+.header-inner {
+  display: flex;
+  flex-direction: column;   /* mobile: logo por cima do menu */
+  align-items: center;
+  gap: var(--espaco-1);
+  padding-block: var(--espaco-2);
+}
+
+.nav-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--espaco-2);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* ---------- 5. Botões ---------- */
+.btn {
+  display: inline-block;
+  padding: 0.75rem 1.25rem;
+  border-radius: var(--raio);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+/* ---------- 6. Cartões de funcionalidades (Grid) ---------- */
+.grid-cartoes {
+  display: grid;
+  grid-template-columns: 1fr;   /* mobile: uma coluna */
+  gap: var(--espaco-2);
+}
+
+/* ---------- 7. Rodapé ---------- */
+.footer-inner {
+  display: grid;
+  gap: var(--espaco-4);
+  padding-block: var(--espaco-4);
+}
+
+/* =========================================================
+   BREAKPOINTS (mobile-first: só min-width)
+   ========================================================= */
+
+/* Tablet e acima */
+@media (min-width: 48em) {      /* 48em = 768px */
+  .header-inner {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .grid-cartoes {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .footer-inner {
+    grid-template-columns: 2fr 1fr;   /* formulário largo + info estreita */
+  }
+}
