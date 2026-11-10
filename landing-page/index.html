@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+  <meta charset="UTF-8">
+  <!-- Essencial para o mobile-first: sem isto o telemóvel "finge" ser um ecrã de 980px -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="CondoGest: gestão de condomínios simples. Assembleias, votações online e comunicação entre condóminos num só lugar.">
+  <title>CondoGest · Gestão de Condomínios</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Link escondido que aparece ao carregar em Tab: permite saltar o menu (acessibilidade) -->
+  <a class="skip-link" href="#conteudo">Saltar para o conteúdo</a>
+
+  <!-- ===================== CABEÇALHO ===================== -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="#" aria-label="CondoGest, página inicial">Condo<span>Gest</span></a>
+
+      <nav aria-label="Navegação principal">
+        <ul class="nav-list">
+          <li><a href="#funcionalidades">Funcionalidades</a></li>
+          <li><a href="#video">Vídeo</a></li>
+          <li><a href="#contacto">Contacto</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ===================== CONTEÚDO PRINCIPAL ===================== -->
+  <main id="conteudo">
+
+    <!-- HERO: a primeira coisa que o visitante vê -->
+    <section class="hero" aria-labelledby="hero-titulo">
+      <div class="container hero-inner">
+        <h1 id="hero-titulo">O seu condomínio, organizado num só lugar</h1>
+        <p class="hero-texto">
+          Marque assembleias, vote online com segurança e acompanhe todas as decisões do prédio,
+          sem papéis nem reuniões intermináveis.
+        </p>
+        <div class="hero-acoes">
+          <a class="btn btn-primario" href="#contacto">Pedir demonstração</a>
+          <a class="btn btn-secundario" href="#video">Ver vídeo</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- FUNCIONALIDADES: cada cartão é um <article> porque faz sentido sozinho -->
+    <section id="funcionalidades" class="funcionalidades" aria-labelledby="func-titulo">
+      <div class="container">
+        <h2 id="func-titulo">Funcionalidades</h2>
+
+        <div class="grid-cartoes">
+          <article class="cartao">
+            <h3>Assembleias</h3>
+            <p>Crie e consulte assembleias com ordem de trabalhos, data e local.</p>
+          </article>
+
+          <article class="cartao">
+            <h3>Votação online</h3>
+            <p>Cada condómino vota uma única vez. Votos duplicados são bloqueados automaticamente.</p>
+          </article>
+
+          <article class="cartao">
+            <h3>Acesso seguro</h3>
+            <p>Autenticação por token: só os condóminos registados acedem aos dados do prédio.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- VÍDEO PROMOCIONAL (requisito R2: vídeo com legendas WebVTT) -->
+    <section id="video" class="video" aria-labelledby="video-titulo">
+      <div class="container">
+        <h2 id="video-titulo">Veja como funciona</h2>
+
+        <figure class="video-figura">
+          <video controls preload="metadata" width="1280" height="720" poster="assets/media/poster.jpg">
+            <source src="assets/media/promo.mp4" type="video/mp4">
+            <!-- kind="captions" + default: legendas ativas por omissão -->
+            <track kind="captions" src="assets/media/promo.pt.vtt" srclang="pt" label="Português" default>
+            <!-- Mensagem para browsers que não suportam <video> -->
+            <p>O seu browser não suporta vídeo. <a href="assets/media/promo.mp4">Descarregue o vídeo</a>.</p>
+          </video>
+          <figcaption>Demonstração de uma votação numa assembleia de condóminos (1 min).</figcaption>
+        </figure>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===================== RODAPÉ COM FORMULÁRIO ===================== -->
+  <footer id="contacto" class="site-footer">
+    <div class="container footer-inner">
+
+      <section class="contacto" aria-labelledby="contacto-titulo">
+        <h2 id="contacto-titulo">Fale connosco</h2>
+        <p>Deixe-nos o seu contacto e marcamos uma demonstração gratuita.</p>
+
+        <!-- novalidate será adicionado no passo do JavaScript (R3), quando a validação for nossa -->
+        <form id="form-contacto" class="form" action="#" method="post">
+          <div class="campo">
+            <label for="nome">Nome</label>
+            <input type="text" id="nome" name="nome" autocomplete="name" required
+                   aria-describedby="erro-nome">
+            <!-- aria-live: o leitor de ecrã anuncia o erro quando o JS o escrever aqui -->
+            <p class="erro" id="erro-nome" aria-live="polite"></p>
+          </div>
+
+          <div class="campo">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" autocomplete="email" required
+                   aria-describedby="erro-email">
+            <p class="erro" id="erro-email" aria-live="polite"></p>
+          </div>
+
+          <div class="campo">
+            <label for="mensagem">Mensagem</label>
+            <textarea id="mensagem" name="mensagem" rows="4" required
+                      aria-describedby="erro-mensagem"></textarea>
+            <p class="erro" id="erro-mensagem" aria-live="polite"></p>
+          </div>
+
+          <button type="submit" class="btn btn-primario">Enviar mensagem</button>
+          <p class="form-sucesso" id="form-sucesso" role="status"></p>
+        </form>
+      </section>
+
+      <div class="footer-info">
+        <address>
+          CondoGest<br>
+          <a href="mailto:geral@condogest.pt">geral@condogest.pt</a>
+        </address>
+        <p><small>&copy; 2026 CondoGest. Projeto académico de Programação Web (Front-End).</small></p>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- defer: o script só corre depois de o HTML estar todo carregado -->
+  <script src="js/main.js" defer></script>
+</body>
+</html>
